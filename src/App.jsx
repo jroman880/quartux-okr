@@ -5,7 +5,7 @@ import { useState } from "react";
 
 const COMPANY_OKRS = [
   {
-    id: 1, color: "indigo",
+    id: 1, color: "red",
     objective: "Become the #1 platform in LATAM for SMB financial management",
     owner: "Lucía Méndez (CEO)", quarter: "Q1 2026", progress: 62, status: "on_track",
     keyResults: [
@@ -73,7 +73,7 @@ const INDIVIDUAL_OKRS = [
   {
     id: 20, parentTeamIds: [10, 14],
     objective: "Drive product-led growth initiatives that increase free-to-paid conversion",
-    owner: "Jaime Mico", initials: "JM", role: "Growth Lead",
+    owner: "Jaime", initials: "JR", role: "Growth Lead",
     quarter: "Q1 2026", progress: 43, status: "at_risk",
     keyResults: [
       { id: 21, text: "Run 3 A/B tests on the upgrade flow", progress: 33, current: "1", target: "3" },
