@@ -281,11 +281,11 @@ const reviewStatusConfig = {
 };
 
 const RATING_LABELS = { 1: "Needs Improvement", 2: "Developing", 3: "Meets Expectations", 4: "Exceeds Expectations", 5: "Outstanding" };
-const RATING_COLORS = { 1: "text-red-500", 2: "text-orange-400", 3: "text-amber-500", 4: "text-emerald-500", 5: "text-indigo-600" };
+const RATING_COLORS = { 1: "text-red-500", 2: "text-orange-400", 3: "text-amber-500", 4: "text-emerald-500", 5: "text-[#e40014]" };
 
 // Company color palettes
 const COMPANY_COLORS = {
-  indigo:  { bg: "bg-indigo-500",  light: "bg-indigo-50",  border: "border-indigo-400", ring: "ring-indigo-400",  text: "text-indigo-700",  badge: "bg-indigo-100 text-indigo-700",  bar: "bg-indigo-500"  },
+  indigo:  { bg: "bg-red-500",  light: "bg-red-50",  border: "border-[#e40014]", ring: "ring-[#e40014]",  text: "text-red-700",  badge: "bg-red-50 text-red-700",  bar: "bg-red-500"  },
   violet:  { bg: "bg-violet-500",  light: "bg-violet-50",  border: "border-violet-400", ring: "ring-violet-400",  text: "text-violet-700",  badge: "bg-violet-100 text-violet-700",  bar: "bg-violet-500"  },
   emerald: { bg: "bg-emerald-500", light: "bg-emerald-50", border: "border-emerald-400",ring: "ring-emerald-400", text: "text-emerald-700", badge: "bg-emerald-100 text-emerald-700", bar: "bg-emerald-500" },
   orange:  { bg: "bg-orange-500",  light: "bg-orange-50",  border: "border-orange-400", ring: "ring-orange-400",  text: "text-orange-700",  badge: "bg-orange-100 text-orange-700",  bar: "bg-orange-500"  },
@@ -396,7 +396,7 @@ function OKRCard({ okr, expanded: defaultExpanded = false }) {
                   <span className="text-xs font-bold text-gray-700">{kr.progress}%</span>
                   {(okr.owner === "You" || okr.owner === "Jaime Mico") && (
                     <button onClick={(e) => { e.stopPropagation(); setUpdateKR(updateKR === kr.id ? null : kr.id); }}
-                      className="text-xs px-2 py-0.5 bg-indigo-50 text-indigo-600 rounded-md hover:bg-indigo-100 transition-colors">
+                      className="text-xs px-2 py-0.5 bg-red-50 text-[#e40014] rounded-md hover:bg-red-100 transition-colors">
                       Update
                     </button>
                   )}
@@ -404,13 +404,13 @@ function OKRCard({ okr, expanded: defaultExpanded = false }) {
               </div>
               <ProgressBar value={kr.progress} size="sm" />
               {updateKR === kr.id && (
-                <div className="mt-2 bg-indigo-50 rounded-xl p-3 space-y-2">
-                  <p className="text-xs font-semibold text-indigo-700">Post a progress update</p>
-                  <textarea className="w-full text-sm border border-indigo-200 rounded-lg p-2 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-300"
+                <div className="mt-2 bg-red-50 rounded-xl p-3 space-y-2">
+                  <p className="text-xs font-semibold text-red-700">Post a progress update</p>
+                  <textarea className="w-full text-sm border border-red-200 rounded-lg p-2 resize-none focus:outline-none focus:ring-2 focus:ring-red-200"
                     rows={2} placeholder="What's the latest? Any blockers?" value={noteVal} onChange={(e) => setNoteVal(e.target.value)} />
                   <div className="flex gap-2">
                     <button onClick={() => { setUpdateKR(null); setNoteVal(""); }}
-                      className="text-xs px-3 py-1.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors">Save Update</button>
+                      className="text-xs px-3 py-1.5 bg-[#e40014] text-white rounded-lg hover:bg-[#bf000f] transition-colors">Save Update</button>
                     <button onClick={() => { setUpdateKR(null); setNoteVal(""); }}
                       className="text-xs px-3 py-1.5 text-gray-500 hover:text-gray-700 transition-colors">Cancel</button>
                   </div>
@@ -440,14 +440,14 @@ function ReviewForm({ review, mode, onSave, onClose }) {
       <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center text-3xl">✓</div>
       <p className="text-lg font-bold text-gray-800">{isManager ? "Review submitted!" : "Self-assessment submitted!"}</p>
       <p className="text-sm text-gray-500">Your feedback has been recorded for Q1 2026.</p>
-      <button onClick={onClose} className="mt-2 text-sm px-5 py-2 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition-colors">Done</button>
+      <button onClick={onClose} className="mt-2 text-sm px-5 py-2 bg-[#e40014] text-white rounded-xl hover:bg-[#bf000f] transition-colors">Done</button>
     </div>
   );
 
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-4 pb-4 border-b border-gray-100">
-        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-400 to-violet-500 flex items-center justify-center text-white font-bold text-base flex-shrink-0">{review.initials}</div>
+        <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-white font-bold text-base flex-shrink-0" style={{background:"#e40014"}}>{review.initials}</div>
         <div>
           <p className="font-bold text-gray-900">{review.employee}</p>
           <p className="text-sm text-gray-500">{review.role} · {review.quarter}</p>
@@ -463,12 +463,12 @@ function ReviewForm({ review, mode, onSave, onClose }) {
             ))}
             <div className="pt-2 border-t border-gray-200"><p className="text-xs text-gray-500 font-medium mb-1">Comments</p><p className="text-sm text-gray-700 leading-relaxed">{review.selfComment}</p></div>
           </div>
-          <div className="bg-indigo-50 rounded-2xl p-4 space-y-4">
-            <p className="text-xs font-bold text-indigo-600 uppercase tracking-wide">Manager Review</p>
+          <div className="bg-red-50 rounded-2xl p-4 space-y-4">
+            <p className="text-xs font-bold text-[#e40014] uppercase tracking-wide">Manager Review</p>
             {REVIEW_DIMENSIONS.map((dim) => (
               <div key={dim}><p className="text-xs text-gray-600 mb-1 font-medium">{dim}</p><StarRating value={review.managerRatings[dim] || 0} readonly /></div>
             ))}
-            <div className="pt-2 border-t border-indigo-200"><p className="text-xs text-gray-500 font-medium mb-1">Manager Feedback</p><p className="text-sm text-gray-700 leading-relaxed">{review.managerComment}</p></div>
+            <div className="pt-2 border-t border-red-100"><p className="text-xs text-gray-500 font-medium mb-1">Manager Feedback</p><p className="text-sm text-gray-700 leading-relaxed">{review.managerComment}</p></div>
           </div>
         </div>
       ) : (
@@ -486,7 +486,7 @@ function ReviewForm({ review, mode, onSave, onClose }) {
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <p className="text-sm font-semibold text-gray-700">{isManager ? "Your Ratings" : "Rate Yourself"}</p>
-                {allRated && <div className="flex items-center gap-2 bg-indigo-50 px-3 py-1.5 rounded-xl"><span className="text-xs text-gray-500">Avg score</span><span className="text-sm font-bold text-indigo-700">{avgRating} / 5</span></div>}
+                {allRated && <div className="flex items-center gap-2 bg-red-50 px-3 py-1.5 rounded-xl"><span className="text-xs text-gray-500">Avg score</span><span className="text-sm font-bold text-red-700">{avgRating} / 5</span></div>}
               </div>
               <div className="grid grid-cols-2 gap-4">
                 {REVIEW_DIMENSIONS.map((dim) => (
@@ -501,7 +501,7 @@ function ReviewForm({ review, mode, onSave, onClose }) {
           {!isView && (
             <div className="space-y-2">
               <label className="text-sm font-semibold text-gray-700">{isManager ? "Manager Feedback" : "Self-Assessment Comments"}</label>
-              <textarea className="w-full text-sm border border-gray-200 rounded-xl p-3 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-300 bg-gray-50"
+              <textarea className="w-full text-sm border border-gray-200 rounded-xl p-3 resize-none focus:outline-none focus:ring-2 focus:ring-red-200 bg-gray-50"
                 rows={4} placeholder={isManager ? "Share specific examples of this person's impact…" : "Reflect on your achievements, challenges…"}
                 value={comment} onChange={(e) => setComment(e.target.value)} />
               <p className="text-xs text-gray-400">{comment.length} characters</p>
@@ -514,7 +514,7 @@ function ReviewForm({ review, mode, onSave, onClose }) {
                 <button onClick={onClose} className="text-sm px-4 py-2 text-gray-500 hover:text-gray-700 transition-colors">Save Draft</button>
                 <button onClick={() => { if (allRated && comment.trim()) { onSave({ ratings, comment }); setSubmitted(true); } }}
                   disabled={!allRated || !comment.trim()}
-                  className={`text-sm px-5 py-2 rounded-xl font-medium transition-colors ${allRated && comment.trim() ? "bg-indigo-600 text-white hover:bg-indigo-700" : "bg-gray-100 text-gray-400 cursor-not-allowed"}`}>
+                  className={`text-sm px-5 py-2 rounded-xl font-medium transition-colors ${allRated && comment.trim() ? "bg-[#e40014] text-white hover:bg-[#bf000f]" : "bg-gray-100 text-gray-400 cursor-not-allowed"}`}>
                   {isManager ? "Submit Review" : "Submit Self-Assessment"}
                 </button>
               </div>
@@ -535,7 +535,7 @@ function ReviewQueueCard({ review, role, onOpen }) {
     ? (Object.values(review.managerRatings).reduce((s, v) => s + v, 0) / Object.values(review.managerRatings).length).toFixed(1) : null;
   return (
     <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex items-center gap-4">
-      <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-indigo-400 to-violet-500 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">{review.initials}</div>
+      <div className="w-11 h-11 rounded-xl flex items-center justify-center text-white font-bold text-sm flex-shrink-0" style={{background:"#e40014"}}>{review.initials}</div>
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 flex-wrap">
           <p className="text-sm font-semibold text-gray-800">{review.employee}</p>
@@ -545,14 +545,14 @@ function ReviewQueueCard({ review, role, onOpen }) {
         <div className="flex items-center gap-3 mt-1.5 flex-wrap">
           <ReviewStatusBadge status={review.status} />
           {selfAvg && <span className="text-xs text-gray-500">Self: <span className="font-semibold text-amber-500">{selfAvg}★</span></span>}
-          {managerAvg && <span className="text-xs text-gray-500">Manager: <span className="font-semibold text-indigo-600">{managerAvg}★</span></span>}
+          {managerAvg && <span className="text-xs text-gray-500">Manager: <span className="font-semibold text-[#e40014]">{managerAvg}★</span></span>}
         </div>
         {review.submittedAt && <p className="text-xs text-gray-400 mt-1">Submitted {review.submittedAt}</p>}
       </div>
       <div className="flex-shrink-0">
         {review.status === "pending_self" && <span className="text-xs text-gray-400 italic">Waiting for employee…</span>}
         {review.status === "pending_manager" && (role === "Team Lead" || role === "HR / People Ops") && (
-          <button onClick={() => onOpen(review, "manager")} className="text-xs px-4 py-2 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition-colors font-medium">Write Review</button>
+          <button onClick={() => onOpen(review, "manager")} className="text-xs px-4 py-2 bg-[#e40014] text-white rounded-xl hover:bg-[#bf000f] transition-colors font-medium">Write Review</button>
         )}
         {review.status === "completed" && (
           <button onClick={() => onOpen(review, "view")} className="text-xs px-4 py-2 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition-colors font-medium">View Completed</button>
@@ -623,7 +623,7 @@ function CascadeCard({ label, objective, owner, progress, status, colorKey, high
         </div>
         <span className={`text-xs font-bold ${pal.text}`}>{progress}%</span>
       </div>
-      {isMe && <span className="mt-1.5 inline-block text-xs bg-indigo-50 text-indigo-600 px-1.5 py-0.5 rounded font-medium">You</span>}
+      {isMe && <span className="mt-1.5 inline-block text-xs bg-red-50 text-[#e40014] px-1.5 py-0.5 rounded font-medium">You</span>}
     </div>
   );
 }
@@ -680,7 +680,7 @@ function AlignmentPage({ role }) {
           <div className="bg-white border border-gray-200 rounded-xl flex p-1 gap-1">
             {[["cascade", "⊞ Cascade"], ["tree", "⊳ Tree"]].map(([v, l]) => (
               <button key={v} onClick={() => setViewMode(v)}
-                className={`text-xs px-3 py-1.5 rounded-lg transition-colors font-medium ${viewMode === v ? "bg-indigo-600 text-white" : "text-gray-500 hover:text-gray-700"}`}>
+                className={`text-xs px-3 py-1.5 rounded-lg transition-colors font-medium ${viewMode === v ? "bg-[#e40014] text-white" : "text-gray-500 hover:text-gray-700"}`}>
                 {l}
               </button>
             ))}
@@ -872,7 +872,7 @@ function AlignmentPage({ role }) {
                       <div className="flex items-center gap-3 py-2 pl-6">
                         <div className="w-px h-4 bg-gray-200" />
                         <p className="text-xs text-gray-400 italic">No team OKRs linked yet</p>
-                        <button className="text-xs text-indigo-500 hover:text-indigo-700">+ Link a team OKR</button>
+                        <button className="text-xs text-red-500 hover:text-red-700">+ Link a team OKR</button>
                       </div>
                     )}
                     {childTeams.map((t, ti) => {
@@ -916,11 +916,11 @@ function AlignmentPage({ role }) {
                                   </div>
                                   <div className="flex-1 min-w-0 pl-1">
                                     <div className={`flex items-center gap-2 px-3 py-2 rounded-xl border bg-white border-gray-100`}>
-                                      <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-indigo-400 to-violet-400 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">{ind.initials}</div>
+                                      <div className="w-7 h-7 rounded-lg flex items-center justify-center text-white text-xs font-bold flex-shrink-0" style={{background:"#e40014"}}>{ind.initials}</div>
                                       <div className="flex-1 min-w-0">
                                         <div className="flex items-center gap-1.5 mb-0.5">
                                           <span className="text-xs font-medium text-gray-500">{ind.owner}</span>
-                                          {ind.owner === "Jaime Mico" && <span className="text-xs bg-indigo-50 text-indigo-600 px-1.5 rounded font-medium">You</span>}
+                                          {ind.owner === "Jaime Mico" && <span className="text-xs bg-red-50 text-[#e40014] px-1.5 rounded font-medium">You</span>}
                                           <StatusBadge status={ind.status} />
                                         </div>
                                         <p className="text-xs text-gray-700 truncate">{ind.objective}</p>
@@ -935,7 +935,7 @@ function AlignmentPage({ role }) {
                             {isExpT && childInds.length === 0 && (
                               <div className="flex items-center gap-2 px-3 pb-1 pl-8">
                                 <p className="text-xs text-gray-400 italic">No individual OKRs linked</p>
-                                <button className="text-xs text-indigo-500 hover:text-indigo-700">+ Link</button>
+                                <button className="text-xs text-red-500 hover:text-red-700">+ Link</button>
                               </div>
                             )}
                           </div>
@@ -963,7 +963,7 @@ function AlignmentPage({ role }) {
             <div>
               <p className="text-xs text-gray-500 mb-1">Cascade trace</p>
               <div className="flex items-center gap-2 text-xs">
-                <span className={`px-2 py-1 rounded-lg font-medium ${highlights.company.length ? "bg-indigo-100 text-indigo-700" : "bg-gray-50 text-gray-400"}`}>
+                <span className={`px-2 py-1 rounded-lg font-medium ${highlights.company.length ? "bg-red-50 text-red-700" : "bg-gray-50 text-gray-400"}`}>
                   {highlights.company.length} company OKR{highlights.company.length !== 1 ? "s" : ""}
                 </span>
                 <span className="text-gray-300">→</span>
@@ -1040,7 +1040,7 @@ function ReviewsPage({ role }) {
                 {myReview.status === "completed" && <p className="text-sm text-gray-600">Your review is complete.</p>}
               </div>
               <div>
-                {myReview.status === "pending_self" && <button onClick={() => setModal({ review: myReview, mode: "self" })} className="text-sm px-4 py-2 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition-colors font-medium">Start Self-Review</button>}
+                {myReview.status === "pending_self" && <button onClick={() => setModal({ review: myReview, mode: "self" })} className="text-sm px-4 py-2 bg-[#e40014] text-white rounded-xl hover:bg-[#bf000f] transition-colors font-medium">Start Self-Review</button>}
                 {myReview.status === "pending_manager" && <button onClick={() => setModal({ review: myReview, mode: "view" })} className="text-sm px-4 py-2 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition-colors font-medium">View Submission</button>}
                 {myReview.status === "completed" && <button onClick={() => setModal({ review: myReview, mode: "view" })} className="text-sm px-4 py-2 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 transition-colors font-medium">View Full Review</button>}
               </div>
@@ -1053,9 +1053,9 @@ function ReviewsPage({ role }) {
             )}
             {myReview.status === "completed" && Object.keys(myReview.managerRatings).length > 0 && (
               <div className="mt-4 pt-4 border-t border-gray-50">
-                <p className="text-xs text-indigo-500 font-medium mb-2">Manager ratings</p>
+                <p className="text-xs text-red-500 font-medium mb-2">Manager ratings</p>
                 <div className="flex gap-4 flex-wrap">{REVIEW_DIMENSIONS.map(dim => (<div key={dim} className="text-center"><p className="text-xs text-gray-500">{dim}</p><StarRating value={myReview.managerRatings[dim] || 0} readonly /></div>))}</div>
-                {myReview.managerComment && <div className="mt-3 bg-indigo-50 rounded-xl p-3"><p className="text-xs text-indigo-600 font-medium mb-1">Manager's message</p><p className="text-sm text-gray-700 italic">"{myReview.managerComment}"</p></div>}
+                {myReview.managerComment && <div className="mt-3 bg-red-50 rounded-xl p-3"><p className="text-xs text-[#e40014] font-medium mb-1">Manager's message</p><p className="text-sm text-gray-700 italic">"{myReview.managerComment}"</p></div>}
               </div>
             )}
           </div>
@@ -1103,34 +1103,49 @@ export default function App() {
     <div className="flex h-screen bg-gray-50 font-sans text-gray-800 overflow-hidden">
 
       {/* Sidebar */}
-      <aside className={`${sidebarOpen ? "w-56" : "w-16"} transition-all duration-300 bg-white border-r border-gray-100 flex flex-col flex-shrink-0`}>
-        <div className="flex items-center gap-2.5 px-4 py-5 border-b border-gray-50">
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">Q</div>
-          {sidebarOpen && <span className="font-bold text-base text-gray-800 truncate">Quartux OKR</span>}
+      <aside className={`${sidebarOpen ? "w-56" : "w-16"} transition-all duration-300 flex flex-col flex-shrink-0`} style={{background:"#111111"}}>
+        <div className="flex items-center gap-2.5 px-4 py-5" style={{borderBottom:"1px solid rgba(255,255,255,0.07)"}}>
+          {/* Quartux Q logo mark */}
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0">
+            <circle cx="16" cy="16" r="15" stroke="#e40014" strokeWidth="2" fill="none"/>
+            <circle cx="16" cy="16" r="7" stroke="#e40014" strokeWidth="2" fill="none"/>
+            <line x1="21" y1="21" x2="28" y2="28" stroke="#e40014" strokeWidth="2.5" strokeLinecap="round"/>
+          </svg>
+          {sidebarOpen && (
+            <div className="flex flex-col leading-tight">
+              <span className="font-bold text-sm text-white tracking-widest uppercase">Quartux</span>
+              <span className="text-xs tracking-wider" style={{color:"#e40014"}}>OKR Platform</span>
+            </div>
+          )}
         </div>
         <nav className="flex-1 py-4 px-2 space-y-1 overflow-y-auto">
           {NAV_ITEMS.map((item) => (
             <button key={item.id} onClick={() => setActiveNav(item.id)}
-              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-colors ${activeNav === item.id ? "bg-indigo-50 text-indigo-700 font-semibold" : "text-gray-500 hover:bg-gray-50 hover:text-gray-700"}`}>
+              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-colors ${activeNav === item.id ? "font-semibold" : "hover:bg-white/5"}`}
+              style={activeNav === item.id
+                ? {background:"rgba(228,0,20,0.15)", color:"#e40014"}
+                : {color:"rgba(255,255,255,0.5)"}}>
               <span className="text-base flex-shrink-0">{item.icon}</span>
               {sidebarOpen && <span className="truncate">{item.label}</span>}
               {item.id === "reviews" && sidebarOpen && (
-                <span className="ml-auto bg-amber-400 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold flex-shrink-0">2</span>
+                <span className="ml-auto text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold flex-shrink-0" style={{background:"#e40014"}}>2</span>
               )}
             </button>
           ))}
         </nav>
         {sidebarOpen && (
-          <div className="px-3 pb-5 border-t border-gray-50 pt-4">
-            <p className="text-xs text-gray-400 mb-1.5 px-1">View as role</p>
+          <div className="px-3 pb-5 pt-4" style={{borderTop:"1px solid rgba(255,255,255,0.07)"}}>
+            <p className="text-xs mb-1.5 px-1" style={{color:"rgba(255,255,255,0.35)"}}>View as role</p>
             <select value={role} onChange={(e) => setRole(e.target.value)}
-              className="w-full text-xs border border-gray-200 rounded-lg px-2 py-1.5 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-200">
-              {ROLES.map(r => <option key={r}>{r}</option>)}
+              className="w-full text-xs rounded-lg px-2 py-1.5 focus:outline-none focus:ring-2"
+              style={{background:"rgba(255,255,255,0.07)", border:"1px solid rgba(255,255,255,0.12)", color:"rgba(255,255,255,0.8)", focusRingColor:"#e40014"}}>
+              {ROLES.map(r => <option key={r} style={{background:"#111111"}}>{r}</option>)}
             </select>
           </div>
         )}
         <button onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="mb-4 mx-auto w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:bg-gray-50 hover:text-gray-600 transition-colors text-sm">
+          className="mb-4 mx-auto w-8 h-8 flex items-center justify-center rounded-lg transition-colors text-sm hover:bg-white/10"
+          style={{color:"rgba(255,255,255,0.35)"}}>
           {sidebarOpen ? "◂" : "▸"}
         </button>
       </aside>
@@ -1140,19 +1155,19 @@ export default function App() {
         <header className="bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between flex-shrink-0">
           <div>
             <h1 className="text-lg font-bold text-gray-900">{pageTitle[activeNav]}</h1>
-            <p className="text-xs text-gray-400 mt-0.5">Q1 2026 · Viewing as <span className="font-medium text-indigo-600">{role}</span></p>
+            <p className="text-xs text-gray-400 mt-0.5">Q1 2026 · Viewing as <span className="font-medium" style={{color:"#e40014"}}>{role}</span></p>
           </div>
           <div className="flex items-center gap-3">
             {activeNav !== "reviews" && activeNav !== "alignment" && (
-              <span className="text-xs bg-indigo-600 text-white px-3 py-1.5 rounded-lg font-medium cursor-pointer hover:bg-indigo-700 transition-colors">+ New Objective</span>
+              <span className="text-xs text-white px-3 py-1.5 rounded-lg font-medium cursor-pointer transition-colors" style={{background:"#e40014"}}>+ New Objective</span>
             )}
             {activeNav === "reviews" && (role === "Team Lead" || role === "HR / People Ops") && (
-              <span className="text-xs bg-violet-600 text-white px-3 py-1.5 rounded-lg font-medium cursor-pointer hover:bg-violet-700 transition-colors">⬇ Export Reviews</span>
+              <span className="text-xs text-white px-3 py-1.5 rounded-lg font-medium cursor-pointer transition-colors" style={{background:"#111111"}}>⬇ Export Reviews</span>
             )}
             {activeNav === "alignment" && (
-              <span className="text-xs bg-indigo-600 text-white px-3 py-1.5 rounded-lg font-medium cursor-pointer hover:bg-indigo-700 transition-colors">+ Link OKR</span>
+              <span className="text-xs text-white px-3 py-1.5 rounded-lg font-medium cursor-pointer transition-colors" style={{background:"#e40014"}}>+ Link OKR</span>
             )}
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-violet-400 to-indigo-500 flex items-center justify-center text-white text-xs font-bold">
+            <div className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold" style={{background:"#e40014"}}>
               {role === "Individual" ? "JM" : role === "Team Lead" ? "TL" : role === "HR / People Ops" ? "HR" : "EX"}
             </div>
           </div>
@@ -1164,7 +1179,7 @@ export default function App() {
           {activeNav === "dashboard" && (
             <div className="space-y-6 max-w-4xl mx-auto">
               <div className="grid grid-cols-4 gap-4">
-                <StatCard label="Avg. Progress" value={`${avgProgress}%`} sub="across all OKRs" color="text-indigo-600" />
+                <StatCard label="Avg. Progress" value={`${avgProgress}%`} sub="across all OKRs" color="text-[#e40014]" />
                 <StatCard label="On Track" value={onTrack} sub={`of ${allOkrs.length} objectives`} color="text-emerald-600" />
                 <StatCard label="At Risk" value={atRisk} sub="need attention" color="text-amber-500" />
                 <StatCard label="Reviews Pending" value={2} sub="→ Go to Reviews" color="text-amber-500" highlight onClick={() => setActiveNav("reviews")} />
@@ -1172,7 +1187,7 @@ export default function App() {
               <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
                 <div className="flex items-center justify-between mb-4">
                   <p className="text-sm font-semibold text-gray-700">OKR Health by Level</p>
-                  <button onClick={() => setActiveNav("alignment")} className="text-xs text-indigo-600 hover:text-indigo-800 font-medium">View cascade →</button>
+                  <button onClick={() => setActiveNav("alignment")} className="text-xs text-[#e40014] hover:text-[#bf000f] font-medium">View cascade →</button>
                 </div>
                 <div className="space-y-4">
                   {[
@@ -1193,7 +1208,7 @@ export default function App() {
                 <p className="text-sm font-semibold text-gray-700 mb-4">Recent Activity</p>
                 <div className="space-y-3">
                   {[
-                    { user: "Jaime M.", action: "submitted self-assessment", time: "3h ago", color: "bg-indigo-100 text-indigo-700" },
+                    { user: "Jaime M.", action: "submitted self-assessment", time: "3h ago", color: "bg-red-50 text-red-700" },
                     { user: "Carlos R.", action: "updated P1 bug resolution time → 5.8h", time: "5h ago", color: "bg-amber-100 text-amber-700" },
                     { user: "Valentina C.", action: "review completed by manager ✓", time: "2d ago", color: "bg-emerald-100 text-emerald-700" },
                     { user: "Growth Team", action: "completed Ship new onboarding flow ✓", time: "3d ago", color: "bg-emerald-100 text-emerald-700" },
