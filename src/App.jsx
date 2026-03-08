@@ -5,124 +5,224 @@ import { useState } from "react";
 
 const COMPANY_OKRS = [
   {
-    id: 1, color: "red",
-    objective: "Become the #1 platform in LATAM for SMB financial management",
-    owner: "Lucía Méndez (CEO)", quarter: "Q1 2026", progress: 62, status: "on_track",
+    id: 1, color: "indigo",
+    objective: "Crecimiento Exponencial: Quartux como el corazón de la nueva red eléctrica nacional",
+    owner: "Dirección General", quarter: "Q1 2026", progress: 5, status: "on_track",
     keyResults: [
-      { id: 1, text: "Reach 10,000 active paying customers", progress: 70, current: "7,000", target: "10,000" },
-      { id: 2, text: "Achieve NPS score of 55+", progress: 80, current: "44", target: "55" },
-      { id: 3, text: "Expand to 3 new countries", progress: 33, current: "1", target: "3" },
+      { id: 1, text: "Proyectos RTP aprobados en HubSpot: > 1.3 GWh anuales", progress: 4, current: "~50 MWh", target: "1,300 MWh" },
+      { id: 2, text: "≥ 5 proyectos Utility Scale con contrato firmado", progress: 0, current: "0", target: "5" },
+      { id: 3, text: "≥ 50 proyectos Venta Directa cerrados en el año", progress: 5, current: "~3", target: "50" },
     ],
   },
   {
     id: 2, color: "violet",
-    objective: "Deliver a world-class product experience with zero critical bugs",
-    owner: "Carlos Ríos (CTO)", quarter: "Q1 2026", progress: 48, status: "at_risk",
+    objective: "Excelencia Operacional: Quartux = 4C",
+    owner: "COO", quarter: "Q1 2026", progress: 10, status: "on_track",
     keyResults: [
-      { id: 4, text: "Reduce P1 bug resolution time to under 4 hours", progress: 60, current: "5.8h", target: "4h" },
-      { id: 5, text: "Ship 4 major product features", progress: 50, current: "2", target: "4" },
-      { id: 6, text: "Achieve 99.9% uptime SLA", progress: 35, current: "99.4%", target: "99.9%" },
+      { id: 4, text: "Tiempo promedio RTP a CAP < 210 días (vs 266 días en Q3 2025)", progress: 15, current: "266 días", target: "210 días" },
+      { id: 5, text: "OpEx < $2.7 USD/kWh/yr", progress: 5, current: "En medición", target: "$2.7 USD/kWh/yr" },
+      { id: 6, text: "CapEx < $300 USD/kWh en proyectos C&I", progress: 10, current: "En medición", target: "$300 USD/kWh" },
     ],
   },
   {
     id: 3, color: "emerald",
-    objective: "Build a high-performance culture that attracts and retains top talent",
-    owner: "Andrea Torres (VP People)", quarter: "Q1 2026", progress: 75, status: "on_track",
+    objective: "Sostenibilidad Financiera: No nos detienen ni las pandémias",
+    owner: "CFO", quarter: "Q1 2026", progress: 12, status: "on_track",
     keyResults: [
-      { id: 7, text: "Achieve 90% employee engagement score", progress: 85, current: "76%", target: "90%" },
-      { id: 8, text: "Reduce voluntary churn to below 8%", progress: 80, current: "9.2%", target: "8%" },
-      { id: 9, text: "Fill all open headcount within 45 days avg", progress: 60, current: "52 days", target: "45 days" },
+      { id: 7, text: "Gross margin promedio > 25% en compraventa (vs 21% en 2024)", progress: 20, current: "21%", target: "25%" },
+      { id: 8, text: "Utilidad neta > $15M USD en el año", progress: 5, current: "En medición", target: "$15M USD" },
+      { id: 9, text: "Desviación ≤ 5% cotización vs. costo real por proyecto", progress: 10, current: "~10%", target: "≤ 5%" },
+    ],
+  },
+  {
+    id: 4, color: "orange",
+    objective: "Calidad Innegociable: Cero Fallas",
+    owner: "COO / HSEQ", quarter: "Q1 2026", progress: 10, status: "on_track",
+    keyResults: [
+      { id: 10, text: "No Conformidades < 20 en el trimestre (vs 36 eventos en Q3 2025)", progress: 15, current: "0 registradas", target: "< 20" },
+      { id: 11, text: "0 accidentes registrables según STPS en el mes", progress: 10, current: "0", target: "0" },
+      { id: 12, text: "100% cumplimiento regulatorio NFPA 855 en instalaciones BESS", progress: 5, current: "En evaluación", target: "100%" },
+    ],
+  },
+  {
+    id: 5, color: "rose",
+    objective: "Cultura Quartux: el mejor equipo de energía de México, punto.",
+    owner: "VP People", quarter: "Q1 2026", progress: 8, status: "on_track",
+    keyResults: [
+      { id: 13, text: "eNPS score > 45% (vs 34% en Q3 2025)", progress: 10, current: "34%", target: "45%" },
+      { id: 14, text: "6 posiciones de management estafeadas en el año", progress: 0, current: "0", target: "6" },
+      { id: 15, text: "100% matrices de habilidades terminadas por equipo", progress: 15, current: "~15%", target: "100%" },
     ],
   },
 ];
 
 const TEAM_OKRS = [
   {
-    id: 10, parentCompanyIds: [1, 2],
-    objective: "Launch onboarding v2 and reduce time-to-value to under 7 days",
-    owner: "Growth Team", quarter: "Q1 2026", progress: 55, status: "on_track",
+    id: 10, parentCompanyIds: [1],
+    objective: "Incrementar generación de SQLs y acelerar cierres comerciales en todos los canales",
+    owner: "Growth", quarter: "Q1 2026", progress: 15, status: "on_track",
     keyResults: [
-      { id: 11, text: "Ship new onboarding flow by Feb 15", progress: 100, current: "Done", target: "Done" },
-      { id: 12, text: "Reduce avg activation time from 14 to 7 days", progress: 40, current: "10.2 days", target: "7 days" },
-      { id: 13, text: "Increase onboarding completion rate to 80%", progress: 25, current: "52%", target: "80%" },
+      { id: 101, text: "+5% conversión calificada por canal vs. trimestre anterior", progress: 10, current: "Baseline", target: "+5%" },
+      { id: 102, text: "Reducir ciclo de ventas a ≤ 120 días VD y ≤ 180 días KAM", progress: 15, current: "En medición", target: "120 / 180 días" },
+      { id: 103, text: "Revenue Dashboard en HubSpot 100% implementado", progress: 20, current: "En progreso", target: "Done" },
     ],
   },
   {
-    id: 14, parentCompanyIds: [1],
-    objective: "Scale revenue team to close $2M in new ARR this quarter",
-    owner: "Sales Team", quarter: "Q1 2026", progress: 72, status: "on_track",
+    id: 20, parentCompanyIds: [1, 3],
+    objective: "Ser el principal motor de cierre C&I: 430 MWh firmados en 2026",
+    owner: "KAM & Venta Directa", quarter: "Q1 2026", progress: 12, status: "on_track",
     keyResults: [
-      { id: 15, text: "Close 120 new accounts", progress: 75, current: "90", target: "120" },
-      { id: 16, text: "Achieve $2M in new ARR", progress: 70, current: "$1.4M", target: "$2M" },
-      { id: 17, text: "Maintain win rate above 28%", progress: 70, current: "26%", target: "28%" },
+      { id: 201, text: "RTP aprobado KAM: 250 MWh en el año (Q1 meta: 30 MWh)", progress: 10, current: "~3 MWh", target: "250 MWh" },
+      { id: 202, text: "RTP aprobado Venta Directa: 180 MWh en el año (Q1 meta: 22 MWh)", progress: 12, current: "~2 MWh", target: "180 MWh" },
+      { id: 203, text: "Ciclo de venta ≤ 120 días en ≥ 70% de oportunidades", progress: 15, current: "En medición", target: "≥ 70% en 120 días" },
     ],
   },
   {
-    id: 18, parentCompanyIds: [3],
-    objective: "Launch Q1 hiring sprint and hit 100% headcount by end of March",
-    owner: "People Ops Team", quarter: "Q1 2026", progress: 68, status: "on_track",
+    id: 30, parentCompanyIds: [1, 3],
+    objective: "Firmar 700 MWh de proyectos Utility-SAE y ser líderes del segmento en México",
+    owner: "Utility Scale", quarter: "Q1 2026", progress: 5, status: "on_track",
     keyResults: [
-      { id: 19, text: "Post all 12 open roles by Jan 31", progress: 100, current: "Done", target: "Done" },
-      { id: 201, text: "Reach 85% offer acceptance rate", progress: 60, current: "74%", target: "85%" },
-      { id: 202, text: "Complete onboarding for 8 new hires", progress: 50, current: "4", target: "8" },
+      { id: 301, text: "Firmar 700 MWh proyectos Utility-SAE en 2026 (Q1: 1 contrato)", progress: 0, current: "0 MWh", target: "700 MWh" },
+      { id: 302, text: "≥ 5 contratos firmados en el año", progress: 0, current: "0", target: "5" },
+      { id: 303, text: "Roles clave contratados en Q1: Gestor de Proyectos + Regulación GA", progress: 5, current: "En proceso", target: "2 contratados" },
+    ],
+  },
+  {
+    id: 40, parentCompanyIds: [2, 4],
+    objective: "Todos los proyectos arrancan cuando el cliente lo espera, sin excepción",
+    owner: "Dirección de Operaciones", quarter: "Q1 2026", progress: 10, status: "on_track",
+    keyResults: [
+      { id: 401, text: "RTP a CAP < 210 días promedio (meta COO compartida)", progress: 15, current: "266 días", target: "210 días" },
+      { id: 402, text: "Descargas fallidas y quejas de cliente < 8 por mes", progress: 10, current: "En medición", target: "< 8/mes" },
+      { id: 403, text: "0 accidentes registrables en el semestre", progress: 10, current: "0", target: "0" },
+    ],
+  },
+  {
+    id: 50, parentCompanyIds: [2, 4],
+    objective: "Ingeniería sin fallas: más rápida, más precisa, 100% NFPA 855",
+    owner: "Ingeniería", quarter: "Q1 2026", progress: 12, status: "on_track",
+    keyResults: [
+      { id: 501, text: "RTP a ingeniería detallada aprobada: < 65 días promedio", progress: 10, current: "En medición", target: "65 días" },
+      { id: 502, text: "Rechazos de ingeniería por cliente: < 1 al semestre", progress: 15, current: "0 rechazos", target: "< 1" },
+      { id: 503, text: "CapEx preliminar por proyecto: < $5 USD/kWh reducción mensual", progress: 10, current: "En medición", target: "< $5 USD/kWh" },
+    ],
+  },
+  {
+    id: 60, parentCompanyIds: [2, 4],
+    objective: "Plataforma de control y monitoreo sin fallas, instalación plug & play",
+    owner: "Software", quarter: "Q1 2026", progress: 8, status: "on_track",
+    keyResults: [
+      { id: 601, text: "Instalación EMS exitosa sin intervención de software (cobertura Modbus 80%)", progress: 10, current: "~20%", target: "80%" },
+      { id: 602, text: "Reducción del 80% en tickets de soporte", progress: 5, current: "Baseline", target: "-80%" },
+      { id: 603, text: "Arquitectura full HA en 100% de sitios prioritarios", progress: 8, current: "~10%", target: "100%" },
+    ],
+  },
+  {
+    id: 70, parentCompanyIds: [3],
+    objective: "Disciplina financiera: márgenes sanos, capital eficiente y cero desviaciones",
+    owner: "Finanzas", quarter: "Q1 2026", progress: 12, status: "on_track",
+    keyResults: [
+      { id: 701, text: "Margen bruto > 20% y neto > 15% por proyecto", progress: 15, current: "En medición", target: "> 20% bruto" },
+      { id: 702, text: "Desviación < 7.5% cotizador vs. presupuesto real", progress: 10, current: "~10%", target: "< 7.5%" },
+      { id: 703, text: "CCC (ciclo de conversión de caja) < 65 días", progress: 10, current: "En medición", target: "< 65 días" },
+    ],
+  },
+  {
+    id: 80, parentCompanyIds: [1, 2],
+    objective: "Construir la máquina de talento más rápida y precisa del sector energético",
+    owner: "People", quarter: "Q1 2026", progress: 10, status: "on_track",
+    keyResults: [
+      { id: 801, text: "Tiempo cobertura vacantes: < 25 días operativas / < 40 días estratégicas", progress: 10, current: "En medición", target: "25 / 40 días" },
+      { id: 802, text: "85% participación en Programa de Liderazgo Quartux (PLQ)", progress: 5, current: "Lanzamiento Q1", target: "85%" },
+      { id: 803, text: "100% matrices de habilidades por equipo terminadas", progress: 15, current: "~15%", target: "100%" },
+    ],
+  },
+  {
+    id: 90, parentCompanyIds: [1, 3],
+    objective: "Escalabilidad legal y compliance sin fricciones para el crecimiento",
+    owner: "Legal", quarter: "Q1 2026", progress: 5, status: "on_track",
+    keyResults: [
+      { id: 901, text: "100% de solicitudes legales gestionadas en herramienta digital", progress: 5, current: "En selección", target: "100%" },
+      { id: 902, text: "70% de tickets atendidos dentro del SLA acordado", progress: 0, current: "Sin herramienta", target: "70%" },
+      { id: 903, text: "100% de contratos firmados antes de inicio de cualquier servicio", progress: 10, current: "En revisión", target: "100%" },
+    ],
+  },
+  {
+    id: 100, parentCompanyIds: [1, 4],
+    objective: "Lealtad total del cliente: NPS > 85%, Churn 0%, upselling activo",
+    owner: "Customer Success", quarter: "Q1 2026", progress: 8, status: "on_track",
+    keyResults: [
+      { id: 1001, text: "NPS / CSAT anual > 85% y Churn = 0%", progress: 10, current: "En medición", target: "85% NPS / 0% Churn" },
+      { id: 1002, text: "≥ 3 cierres de Upselling / Cross-selling en 2026", progress: 0, current: "0", target: "3" },
+      { id: 1003, text: "Chatbot de soporte operativo en Q2 (en colaboración con Software)", progress: 15, current: "En desarrollo", target: "Q2 listo" },
+    ],
+  },
+  {
+    id: 110, parentCompanyIds: [1, 5],
+    objective: "Posicionar a Quartux como líder en almacenamiento energético en México",
+    owner: "Marketing", quarter: "Q1 2026", progress: 10, status: "on_track",
+    keyResults: [
+      { id: 1101, text: "12 SQL generados para MEM (Mercado Eléctrico Mayorista) en el año", progress: 8, current: "~1", target: "12" },
+      { id: 1102, text: "6,000 nuevos seguidores en LinkedIn en el año", progress: 5, current: "~300", target: "6,000" },
+      { id: 1103, text: "+20% alcance orgánico publicaciones de marca empleadora", progress: 10, current: "Baseline", target: "+20%" },
     ],
   },
 ];
 
 const INDIVIDUAL_OKRS = [
   {
-    id: 20, parentTeamIds: [10, 14],
-    objective: "Drive product-led growth initiatives that increase free-to-paid conversion",
-    owner: "Jaime", initials: "JR", role: "Growth Lead",
-    quarter: "Q1 2026", progress: 43, status: "at_risk",
+    id: 2001, parentTeamIds: [40],
+    objective: "Cero No Conformidades y cumplimiento NFPA 855 al 100% en todos los proyectos",
+    owner: "HSEQ", initials: "HQ", role: "Calidad y Seguridad",
+    quarter: "Q1 2026", progress: 10, status: "on_track",
     keyResults: [
-      { id: 21, text: "Run 3 A/B tests on the upgrade flow", progress: 33, current: "1", target: "3" },
-      { id: 22, text: "Increase free-to-paid conversion from 4% to 7%", progress: 50, current: "5.5%", target: "7%" },
-      { id: 23, text: "Publish 5 case studies with customers", progress: 40, current: "2", target: "5" },
+      { id: 20011, text: "0 NC mayores; NC menores: cierre en < 45 días (ATNC ≥ 90%)", progress: 15, current: "0 NC abiertas", target: "0 NC / ATNC 90%" },
+      { id: 20012, text: "Cumplimiento legal HSEQ ≥ 90% (contratos, IMSS, EPP)", progress: 10, current: "En auditoría", target: "≥ 90%" },
+      { id: 20013, text: "Cumplimiento NFPA 855 = 100% en instalaciones BESS", progress: 5, current: "En revisión", target: "100%" },
     ],
   },
   {
-    id: 30, parentTeamIds: [10],
-    objective: "Redesign onboarding experience to boost activation completion rate",
-    owner: "Ana López", initials: "AL", role: "Product Designer",
-    quarter: "Q1 2026", progress: 68, status: "on_track",
+    id: 2002, parentTeamIds: [40],
+    objective: "Construcción en tiempo y forma: kick off a CAP en < 83 días, 0 accidentes",
+    owner: "Site Managers", initials: "SM", role: "Construcción",
+    quarter: "Q1 2026", progress: 8, status: "on_track",
     keyResults: [
-      { id: 31, text: "Complete UX audit of current onboarding flow", progress: 100, current: "Done", target: "Done" },
-      { id: 32, text: "Ship redesigned onboarding to 50% of users", progress: 60, current: "30%", target: "50%" },
-      { id: 33, text: "Raise completion rate from 52% to 70%", progress: 45, current: "59%", target: "70%" },
+      { id: 20021, text: "Kick off preliminar de obra a CAP aprobado: < 83 días", progress: 8, current: "En medición", target: "< 83 días" },
+      { id: 20022, text: "Adicionales por proyecto: < 5% del presupuesto", progress: 10, current: "En medición", target: "< 5%" },
+      { id: 20023, text: "0 accidentes registrables en construcción", progress: 10, current: "0", target: "0" },
     ],
   },
   {
-    id: 40, parentTeamIds: [10],
-    objective: "Build scalable API infrastructure to support multi-country expansion",
-    owner: "Diego Reyes", initials: "DR", role: "Backend Engineer",
-    quarter: "Q1 2026", progress: 55, status: "on_track",
+    id: 2003, parentTeamIds: [40],
+    objective: "Máximos ahorros para el cliente y cero descargas fallidas en operación",
+    owner: "Monitoreo", initials: "MN", role: "Operaciones",
+    quarter: "Q1 2026", progress: 12, status: "on_track",
     keyResults: [
-      { id: 41, text: "Migrate 3 core services to new architecture", progress: 67, current: "2", target: "3" },
-      { id: 42, text: "Achieve p99 API latency under 200ms", progress: 40, current: "340ms", target: "200ms" },
-      { id: 43, text: "Deploy to Colombia staging env", progress: 60, current: "In progress", target: "Done" },
+      { id: 20031, text: "Descargas fallidas: < 8 por mes (48 en el semestre)", progress: 10, current: "En medición", target: "< 8/mes" },
+      { id: 20032, text: "95% de ahorros logrados por operación en setpoint ideal", progress: 15, current: "En medición", target: "95%" },
+      { id: 20033, text: "0 tickets asignados a monitoreo por reportes incorrectos", progress: 12, current: "En seguimiento", target: "0 tickets" },
     ],
   },
   {
-    id: 50, parentTeamIds: [14],
-    objective: "Implement revenue intelligence dashboard to accelerate deal velocity",
-    owner: "Valentina Cruz", initials: "VC", role: "Data Analyst",
-    quarter: "Q1 2026", progress: 80, status: "on_track",
+    id: 2004, parentTeamIds: [40],
+    objective: "Disponibilidad operativa al 100% con mantenimiento preventivo y correctivo al día",
+    owner: "Mantenimiento", initials: "MT", role: "O&M",
+    quarter: "Q1 2026", progress: 10, status: "on_track",
     keyResults: [
-      { id: 51, text: "Build pipeline health dashboard in Metabase", progress: 100, current: "Done", target: "Done" },
-      { id: 52, text: "Reduce avg sales cycle from 22 to 16 days", progress: 70, current: "18 days", target: "16 days" },
-      { id: 53, text: "Deliver weekly pipeline report to leadership", progress: 70, current: "7 of 10", target: "10 reports" },
+      { id: 20041, text: "0 descargas fallidas en proyectos previos a aceptación de CAP", progress: 10, current: "0", target: "0" },
+      { id: 20042, text: "Cumplimiento del PAM (Plan Anual de Mantenimiento) ≥ 99%", progress: 8, current: "En medición", target: "≥ 99%" },
+      { id: 20043, text: "0 accidentes registrables en O&M", progress: 10, current: "0", target: "0" },
     ],
   },
   {
-    id: 60, parentTeamIds: [18],
-    objective: "Build world-class candidate experience that attracts top engineering talent",
-    owner: "Sofia Vargas", initials: "SV", role: "Talent Partner",
-    quarter: "Q1 2026", progress: 72, status: "on_track",
+    id: 2005, parentTeamIds: [40],
+    objective: "Ejecución del ciclo RTP–CAP con excelencia: 0 retrasos por gestión Quartux",
+    owner: "PMs", initials: "PM", role: "Project Management",
+    quarter: "Q1 2026", progress: 8, status: "on_track",
     keyResults: [
-      { id: 61, text: "Cut interview process from 6 to 4 rounds", progress: 100, current: "Done", target: "Done" },
-      { id: 62, text: "Achieve 4.5★ Glassdoor rating for interview experience", progress: 60, current: "4.1★", target: "4.5★" },
-      { id: 63, text: "Source 50% of hires via referrals", progress: 55, current: "28%", target: "50%" },
+      { id: 20051, text: "Ruta RTP a CAP < 210 días; 0 proyectos con retraso por gestión QTX", progress: 12, current: "En seguimiento", target: "210 días / 0 retrasos" },
+      { id: 20052, text: "Descargas fallidas y quejas < 2 por mes (12 en el semestre)", progress: 8, current: "0", target: "< 2/mes" },
+      { id: 20053, text: "100% matrices de habilidades PMs terminadas", progress: 5, current: "~5%", target: "100%" },
     ],
   },
 ];
@@ -133,32 +233,32 @@ const REVIEW_DIMENSIONS = ["Execution", "Collaboration", "Impact", "Growth"];
 
 const INITIAL_REVIEWS = [
   {
-    id: "r1", employee: "Jaime", initials: "JM", role: "Growth Lead",
-    manager: "Sofía Vargas", quarter: "Q1 2026", status: "pending_manager",
+    id: "r1", employee: "Líder Growth", initials: "LG", role: "Growth Lead",
+    manager: "Director Comercial", quarter: "Q1 2026", status: "pending_manager",
     selfRatings: { Execution: 4, Collaboration: 5, Impact: 3, Growth: 4 },
-    selfComment: "This quarter I focused on launching the new A/B testing framework. We made great progress on onboarding conversion, though expansion to new markets was slower than expected due to integration blockers.",
+    selfComment: "Este trimestre enfoqué el trabajo en mejorar la conversión calificada por canal y en sentar las bases del Revenue Dashboard en HubSpot. El ciclo de ventas aún está por encima del target, pero ya tenemos visibilidad clara de los bloqueos.",
     managerRatings: {}, managerComment: "", submittedAt: "Mar 5, 2026", reviewedAt: null,
   },
   {
-    id: "r2", employee: "Ana López", initials: "AL", role: "Product Designer",
-    manager: "Sofía Vargas", quarter: "Q1 2026", status: "pending_manager",
+    id: "r2", employee: "Líder Ingeniería", initials: "LI", role: "Jefe de Ingeniería",
+    manager: "COO", quarter: "Q1 2026", status: "pending_manager",
     selfRatings: { Execution: 5, Collaboration: 4, Impact: 4, Growth: 3 },
-    selfComment: "I delivered the onboarding v2 redesign ahead of schedule and the results have been outstanding.",
+    selfComment: "El equipo logró cero rechazos de ingeniería por cliente en el trimestre y avanzamos bien en la certificación NFPA 855. El tiempo RTP a ingeniería detallada bajó de 80 a 72 días en promedio.",
     managerRatings: {}, managerComment: "", submittedAt: "Mar 4, 2026", reviewedAt: null,
   },
   {
-    id: "r3", employee: "Diego Reyes", initials: "DR", role: "Backend Engineer",
-    manager: "Sofía Vargas", quarter: "Q1 2026", status: "pending_self",
+    id: "r3", employee: "Líder Software", initials: "LS", role: "Tech Lead Software",
+    manager: "COO", quarter: "Q1 2026", status: "pending_self",
     selfRatings: {}, selfComment: "", managerRatings: {}, managerComment: "",
     submittedAt: null, reviewedAt: null,
   },
   {
-    id: "r4", employee: "Valentina Cruz", initials: "VC", role: "Data Analyst",
-    manager: "Sofía Vargas", quarter: "Q1 2026", status: "completed",
+    id: "r4", employee: "Líder People", initials: "LP", role: "VP People",
+    manager: "CEO", quarter: "Q1 2026", status: "completed",
     selfRatings: { Execution: 4, Collaboration: 4, Impact: 5, Growth: 4 },
-    selfComment: "Built the entire metrics pipeline from scratch. Proud of the impact on our data-driven decisions.",
+    selfComment: "Lanzamos el Programa de Liderazgo Quartux con 3 módulos planificados y ya tenemos el 40% de las matrices de habilidades documentadas. El tiempo de cobertura de vacantes bajó a 32 días en promedio.",
     managerRatings: { Execution: 4, Collaboration: 5, Impact: 5, Growth: 4 },
-    managerComment: "Valentina exceeded expectations this quarter. Her data infrastructure work directly enabled our expansion decisions.",
+    managerComment: "El equipo de People está construyendo la infraestructura de talento que Quartux necesita para escalar. El PLQ es un diferenciador real. Excelente ejecución este trimestre.",
     submittedAt: "Mar 1, 2026", reviewedAt: "Mar 6, 2026",
   },
 ];
@@ -188,6 +288,8 @@ const COMPANY_COLORS = {
   indigo:  { bg: "bg-indigo-500",  light: "bg-indigo-50",  border: "border-indigo-400", ring: "ring-indigo-400",  text: "text-indigo-700",  badge: "bg-indigo-100 text-indigo-700",  bar: "bg-indigo-500"  },
   violet:  { bg: "bg-violet-500",  light: "bg-violet-50",  border: "border-violet-400", ring: "ring-violet-400",  text: "text-violet-700",  badge: "bg-violet-100 text-violet-700",  bar: "bg-violet-500"  },
   emerald: { bg: "bg-emerald-500", light: "bg-emerald-50", border: "border-emerald-400",ring: "ring-emerald-400", text: "text-emerald-700", badge: "bg-emerald-100 text-emerald-700", bar: "bg-emerald-500" },
+  orange:  { bg: "bg-orange-500",  light: "bg-orange-50",  border: "border-orange-400", ring: "ring-orange-400",  text: "text-orange-700",  badge: "bg-orange-100 text-orange-700",  bar: "bg-orange-500"  },
+  rose:    { bg: "bg-rose-500",    light: "bg-rose-50",    border: "border-rose-400",   ring: "ring-rose-400",   text: "text-rose-700",   badge: "bg-rose-100 text-rose-700",      bar: "bg-rose-500"    },
 };
 
 // ─── Utility Components ────────────────────────────────────────────────────
@@ -292,7 +394,7 @@ function OKRCard({ okr, expanded: defaultExpanded = false }) {
                 <div className="flex items-center gap-2 flex-shrink-0">
                   <span className="text-xs font-medium text-gray-500">{kr.current} / {kr.target}</span>
                   <span className="text-xs font-bold text-gray-700">{kr.progress}%</span>
-                  {(okr.owner === "You" || okr.owner === "Jaime") && (
+                  {(okr.owner === "You" || okr.owner === "Jaime Mico") && (
                     <button onClick={(e) => { e.stopPropagation(); setUpdateKR(updateKR === kr.id ? null : kr.id); }}
                       className="text-xs px-2 py-0.5 bg-indigo-50 text-indigo-600 rounded-md hover:bg-indigo-100 transition-colors">
                       Update
@@ -724,7 +826,7 @@ function AlignmentPage({ role }) {
                     highlighted={isHl}
                     dimmed={isDim}
                     onClick={() => toggleSelect("individual", ind.id)}
-                    isMe={ind.owner === "Jaime"}
+                    isMe={ind.owner === "Jaime Mico"}
                   />
                 </div>
               );
@@ -818,7 +920,7 @@ function AlignmentPage({ role }) {
                                       <div className="flex-1 min-w-0">
                                         <div className="flex items-center gap-1.5 mb-0.5">
                                           <span className="text-xs font-medium text-gray-500">{ind.owner}</span>
-                                          {ind.owner === "Jaime" && <span className="text-xs bg-indigo-50 text-indigo-600 px-1.5 rounded font-medium">You</span>}
+                                          {ind.owner === "Jaime Mico" && <span className="text-xs bg-indigo-50 text-indigo-600 px-1.5 rounded font-medium">You</span>}
                                           <StatusBadge status={ind.status} />
                                         </div>
                                         <p className="text-xs text-gray-700 truncate">{ind.objective}</p>
@@ -1109,8 +1211,8 @@ export default function App() {
 
           {activeNav === "my" && (
             <div className="max-w-3xl mx-auto space-y-4">
-              <p className="text-sm text-gray-500">{INDIVIDUAL_OKRS.filter(i => i.owner === "Jaime").length} objective this quarter</p>
-              {INDIVIDUAL_OKRS.filter(i => i.owner === "Jaime").map(okr => <OKRCard key={okr.id} okr={okr} expanded={true} />)}
+              <p className="text-sm text-gray-500">{INDIVIDUAL_OKRS.filter(i => i.owner === "Jaime Mico").length} objective this quarter</p>
+              {INDIVIDUAL_OKRS.filter(i => i.owner === "Jaime Mico").map(okr => <OKRCard key={okr.id} okr={okr} expanded={true} />)}
             </div>
           )}
           {activeNav === "team" && (
