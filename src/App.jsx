@@ -133,7 +133,7 @@ const REVIEW_DIMENSIONS = ["Execution", "Collaboration", "Impact", "Growth"];
 
 const INITIAL_REVIEWS = [
   {
-    id: "r1", employee: "Jaime Mico", initials: "JM", role: "Growth Lead",
+    id: "r1", employee: "Jaime", initials: "JM", role: "Growth Lead",
     manager: "Sofía Vargas", quarter: "Q1 2026", status: "pending_manager",
     selfRatings: { Execution: 4, Collaboration: 5, Impact: 3, Growth: 4 },
     selfComment: "This quarter I focused on launching the new A/B testing framework. We made great progress on onboarding conversion, though expansion to new markets was slower than expected due to integration blockers.",
@@ -292,7 +292,7 @@ function OKRCard({ okr, expanded: defaultExpanded = false }) {
                 <div className="flex items-center gap-2 flex-shrink-0">
                   <span className="text-xs font-medium text-gray-500">{kr.current} / {kr.target}</span>
                   <span className="text-xs font-bold text-gray-700">{kr.progress}%</span>
-                  {(okr.owner === "You" || okr.owner === "Jaime Mico") && (
+                  {(okr.owner === "You" || okr.owner === "Jaime") && (
                     <button onClick={(e) => { e.stopPropagation(); setUpdateKR(updateKR === kr.id ? null : kr.id); }}
                       className="text-xs px-2 py-0.5 bg-indigo-50 text-indigo-600 rounded-md hover:bg-indigo-100 transition-colors">
                       Update
@@ -724,7 +724,7 @@ function AlignmentPage({ role }) {
                     highlighted={isHl}
                     dimmed={isDim}
                     onClick={() => toggleSelect("individual", ind.id)}
-                    isMe={ind.owner === "Jaime Mico"}
+                    isMe={ind.owner === "Jaime"}
                   />
                 </div>
               );
@@ -818,7 +818,7 @@ function AlignmentPage({ role }) {
                                       <div className="flex-1 min-w-0">
                                         <div className="flex items-center gap-1.5 mb-0.5">
                                           <span className="text-xs font-medium text-gray-500">{ind.owner}</span>
-                                          {ind.owner === "Jaime Mico" && <span className="text-xs bg-indigo-50 text-indigo-600 px-1.5 rounded font-medium">You</span>}
+                                          {ind.owner === "Jaime" && <span className="text-xs bg-indigo-50 text-indigo-600 px-1.5 rounded font-medium">You</span>}
                                           <StatusBadge status={ind.status} />
                                         </div>
                                         <p className="text-xs text-gray-700 truncate">{ind.objective}</p>
@@ -1109,8 +1109,8 @@ export default function App() {
 
           {activeNav === "my" && (
             <div className="max-w-3xl mx-auto space-y-4">
-              <p className="text-sm text-gray-500">{INDIVIDUAL_OKRS.filter(i => i.owner === "Jaime Mico").length} objective this quarter</p>
-              {INDIVIDUAL_OKRS.filter(i => i.owner === "Jaime Mico").map(okr => <OKRCard key={okr.id} okr={okr} expanded={true} />)}
+              <p className="text-sm text-gray-500">{INDIVIDUAL_OKRS.filter(i => i.owner === "Jaime").length} objective this quarter</p>
+              {INDIVIDUAL_OKRS.filter(i => i.owner === "Jaime").map(okr => <OKRCard key={okr.id} okr={okr} expanded={true} />)}
             </div>
           )}
           {activeNav === "team" && (
